@@ -9,7 +9,7 @@
 Setup is usual :
  -run in commandline from folder : 
  	- bundle install
-	- rails db:create |rails db:migrate | rails db:seed
+	- rails db:setup
 	- rails s
 - go to http://localhost:3000 
 
