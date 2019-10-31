@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  include LikesHelper
+  include CommentLikesHelper
+  include GossipLikesHelper
 end

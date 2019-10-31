@@ -9,7 +9,7 @@ class GossipsController < ApplicationController
   def show
     @gossip = Gossip.find(params[:id])
     @comments = Comment.where(gossip_id: params[:id]).all
-    @nb_likes = Like.where(gossip_id: params[:id]).count
+    @nb_likes = GossipLike.where(gossip_id: params[:id]).count
   end
 
   def new

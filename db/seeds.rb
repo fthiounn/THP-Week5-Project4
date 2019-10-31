@@ -10,7 +10,7 @@
 
 require 'faker'
 
-nb_user = 50
+nb_user = 51
 nb_city = 20
 nb_gossip = 100
 nb_tags = 20
@@ -22,7 +22,8 @@ cities = []
 gossips = []
 tags = []
 messages = []
-likes = []
+clikes = []
+glikes = []
 comments = []
 comments2 = []
 zip_array = [75000,75001,75002,75003,75004,75005,75006,75007,75008,75009,75010,75011,75012,75013,75014,75015,75016,75017,75018,75019,75020]
@@ -33,7 +34,7 @@ nb_city.times do |x|
     name: Faker::Address.city,
     zip_code: zip_array.sample)
   cities << city
-  puts "Seeding vity nb#{x}"
+  puts "Seeding city nb#{x}"
 end
 
 
@@ -121,18 +122,18 @@ end
 
 #seeding des likes vers comments
 nb_likes.times do |x|
-  like = Like.create(
+  like = CommentLike.create(
     user_id: users.sample.id,
     comment_id: comments.sample.id)
-  likes << like
+  clikes << like
   puts "Seeding Random Recipients Recipient to Private messages nb#{x}"
 end
 #seeding des likes vers gossip
 nb_likes.times do |x|
-  like = Like.create(
+  like = GossipLike.create(
     user_id: users.sample.id,
     gossip_id: gossips.sample.id)
-  likes << like
+  glikes << like
   puts "Seeding Random Recipients Recipient to Private messages nb#{x}"
 end
 #seeding comments of comments
