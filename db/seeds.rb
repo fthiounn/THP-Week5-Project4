@@ -44,6 +44,7 @@ nb_user.times do |x|
     last_name: Faker::Name.last_name,
     description: Faker::Lorem.paragraph,
     email: Faker::Internet.email,
+    password: 'azerty',
     age: rand(16..80),
     city_id: cities.sample.id)
   users << user
