@@ -34,9 +34,11 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          <% if logged_in? %>
           <li class="nav-item">
             <%= link_to "Add a Gossip", {controller: "gossips", action: "new"},class: "nav-link"%>
           </li>
+          <% end %>
           <li class="nav-item">
             <%= link_to "Team", {controller: "static_pages", action: "team"}, class: "nav-link" %>
           </li>
@@ -50,7 +52,7 @@
             <%= link_to current_user.first_name, {controller: "users", action: "show", id: current_user.id}, class: "nav-link" %>
           </li>
           <li class="nav-item float-right">
-            <%= link_to icon('fas', 'sign-out-alt')+"  Logout", {controller: "sessions", action: "destroy"}, class: "nav-link" %>
+            <%= link_to icon('fas', 'sign-out-alt')+"  Logout", session_path(session.id), method: :delete, class: "nav-link" %>
           </li>
           <% else %>
           <li class="float-right">

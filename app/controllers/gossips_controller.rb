@@ -1,4 +1,7 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :edit, :create, :update]
+
+
   def index
     @gossip_array = Gossip.all
   end
@@ -6,6 +9,7 @@ class GossipsController < ApplicationController
   def show
     @gossip = Gossip.find(params[:id])
     @comments = Comment.where(gossip_id: params[:id]).all
+    @nb_likes = Like.where(gossip_id: params[:id]).count
   end
 
   def new
@@ -17,8 +21,8 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new(title: params[:gossip_title], content: params[:gossip_content],user: User.find(1))  # avec xxx qui sont les données obtenues à partir du formulaire
-    Gossip_tag.new(gossip_id: @gossip.id, tag: params[:select_tag])
+    @gossip = Gossip.new(title: params[:gossip_title], content: params[:gossip_content],user: User.find(current_user.id))  # avec xxx qui sont les données obtenues à partir du formulaire
+    #Gossip_tag.new(gossip_id: @gossip.id, tag: params[:select_tag])
     if @gossip.save # essaie de sauvegarder en base @gossip
         flash[:success] = "You successfuly created a gossip"
         redirect_to :action => 'show', :id => @gossip.id
@@ -49,6 +53,12 @@ class GossipsController < ApplicationController
     else
       flash.now[:danger] = "Error with the gossip deletion"
       redirect_to action: "show", :id => params[:id]
+    end
+  end
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "This section requires to be logged-in. Please log in."
+      redirect_to new_session_path
     end
   end
 end

@@ -4,8 +4,7 @@
 <div class="jumbotron-hero">
   <div class="container text-center" >
     <h1 class="display-4 pt-5 font-weight-bold text-dark">THE GOSSIP PROJECT</h1>
-    <p class="lead pt-5 text-light ">Join our community and share your gossips</p>
-    <%= link_to "Create an account and share a Gossip !", {controller: "gossips", action: "new"}, class: "btn btn-success btn-lg mt-5 mr-4 " %>
+    <%= link_to "Create an account and spread your Gossips !", {controller: "gossips", action: "new"}, class: "btn btn-success btn-lg bottom"%>
   </div>
 </div>
 
@@ -20,6 +19,10 @@
           <h5 class="card-title"><%= gossip.title %></h5>
           <p class="card-title">A gossip from : <%= link_to gossip.user.first_name, {controller: "users", action: "show", id: gossip.user.id}%></p>
           <p class="card-title">This gossip has <%= Comment.where(gossip_id: gossip.id).count %> comments</p>
+          <div class="mb-2">
+              <span >This gossip has <%= nb_gossip_likes?(gossip.id)%> Likes</span>
+              <span class="ml-2 text-info"><%=icon('fas', 'thumbs-up')%></span>
+          </div>
           <%= link_to "See this Gossip", {controller: "gossips", action: "show", id: gossip.id}, class: "btn btn-primary" %>
         </div>
       </div>
