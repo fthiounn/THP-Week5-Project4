@@ -11,7 +11,7 @@
 	    <%= link_to "Edit this Gossip", {controller: "gossips", action: "edit", id: @gossip.id}, class: 'btn btn-primary mr-5' %>
 	    <%= link_to 'Destroy', gossip_path(@gossip), class: 'btn btn-danger ml-5', method: :delete%>
 	    <% end %>
-	    <div class="text-info font-italic">
+	    <p class="card-title text-info font-italic">
 		    <span >This gossip has <%= @nb_likes%> <%= nb_gossip_likes?(@gossip.id) > 1 ? 'Likes' : 'Like'%></span>
 		    <!-- BOUTON GOSSIP LIKE -->
 	    <% if logged_in? %>
@@ -26,7 +26,7 @@
 		    <% end %>
 		 <%else%>
 		    	<span class="ml-2	"><%=icon('fas', 'thumbs-up')%></span>
-		</div>
+		</p>
 	    <% end %>
 
 	    
@@ -70,7 +70,6 @@
 			    <%= link_to "Edit this comment", edit_gossip_comment_path(@gossip.id, comment.id), class: 'btn btn-secondary' %>
 			    <% end %>
 			  </div>
-			</div>
 		<%end%>
 	</div>
 </div>

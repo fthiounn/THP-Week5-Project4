@@ -19,8 +19,9 @@
           <h5 class="card-title"><%= gossip.title %></h5>
           <p class="card-title">A gossip from : <%= link_to gossip.user.first_name, {controller: "users", action: "show", id: gossip.user.id}%></p>
           <p class="card-title">This gossip has <%= Comment.where(gossip_id: gossip.id).count %> comments</p>
-          <div class="mb-2">
+          <p class="mb-2 text-info">
               <span >This gossip has <%= nb_gossip_likes?(gossip.id)%> <%= nb_gossip_likes?(gossip.id) > 1 ? 'Likes' : 'Like'%></span>
+              <!-- GOSSIP LIKE BUTTON-->
               <% if logged_in? %>
                 <% if is_gossip_liked?(gossip.id) %>
                 <span class="ml-2">
@@ -33,9 +34,8 @@
                 <% end %>
              <%else%>
                   <span class="ml-2 "><%=icon('fas', 'thumbs-up')%></span>
-            </div>
               <% end %>
-          </div>
+          </p>
           <%= link_to "See this Gossip", {controller: "gossips", action: "show", id: gossip.id}, class: "btn btn-primary" %>
         </div>
       </div>

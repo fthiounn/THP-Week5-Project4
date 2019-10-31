@@ -20,7 +20,7 @@
 			  <div class="card-body">
 			    <h5 class="card-title"><%= gossip.title %></h5>
 			    <p class="card-title">A gossip from : <%= link_to gossip.user.first_name , {controller: "users", action: "show", id: gossip.user.id}%></p>
-			    <div class="mb-2">
+			    <div class="mb-2 text-info">
 			        <span >This gossip has <%= nb_gossip_likes?(gossip.id)%> <%= nb_gossip_likes?(gossip.id) > 1 ? 'Likes' : 'Like'%></span>
 			        <% if logged_in? %>
 			    	    <% if is_gossip_liked?(gossip.id) %>
@@ -38,7 +38,6 @@
 			        <% end %>
 			    </div>
 			    <%= link_to "See this Gossip",{controller: "gossips", action: "show", id: gossip.id}, class: 'btn btn-primary' %>
-			  </div>
 			</div>
 		<%end%>
 	</div>
