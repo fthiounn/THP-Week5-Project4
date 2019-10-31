@@ -14,6 +14,8 @@
     <!-- BOOTSWATCH -->
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/journal/bootstrap.min.css" rel="stylesheet" integrity="sha384-ciphE0NCAlD2/N6NUApXAN2dAs/vcSAOTzyE202jJx3oS8n4tAQezRgnlHqcJ59C" crossorigin="anonymous">
 
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -24,7 +26,7 @@
     <!-- NAVBAR -->
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary  container-fluid">
             <%= link_to "The Gossip Project", {controller: "gossips", action: "index"}, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,18 +34,31 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <%= link_to "Home", {controller: "gossips", action: "index"}, class: "nav-link" %>
-          </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <%= link_to "Add a Gossip", {controller: "gossips", action: "new"},class: "nav-link"%>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <%= link_to "Team", {controller: "static_pages", action: "team"}, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Contact", {controller: "static_pages", action: "contact"}, class: "nav-link" %>
           </li>
+        </ul>
+        <ul class="navbar-nav">
+          <% if logged_in? %>
+          <li class="nav-item navbar-right">
+            <%= link_to "Logged in as #{current_user.first_name}", {controller: "users", action: "show", id: current_user.id}, class: "nav-link" %>
+          </li>
+          <li class="nav-item float-right">
+            <%= link_to "Logout", {controller: "sessions", action: "destroy"}, class: "nav-link" %>
+          </li>
+          <% else %>
+          <li class="float-right"><%= link_to "Sign up", {controller: "users", action: "new"}, class: "nav-link" %>
+          </li>
+          <li class="float-right">
+            <%= link_to "Loggin", {controller: "sessions", action: "new"}, class: "nav-link" %>
+          </li>
+          <% end %>
         </ul>
       </div>
     </nav>
